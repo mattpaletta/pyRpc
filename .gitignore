@@ -1,1 +1,9 @@
 pyRpc.egg-info
+.idea/dbnavigator.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/pyRpc.iml
+.idea/workspace.xml
+env/
+**.pyc
+**.swp
