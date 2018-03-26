@@ -6,7 +6,8 @@ as this client will try and communicate immediately.
 """
 
 import time
-from pyRpc import RpcConnection
+
+from pyRpc.RpcConnection import RpcConnection
 
 ASYNC_CALLS = 0
 

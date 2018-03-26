@@ -3,8 +3,7 @@
 import time
 import logging
 
-import pyRpc
-
+from pyRpc.PyRpc import PyRpc
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -12,7 +11,7 @@ logging.basicConfig(level=logging.DEBUG)
 def main():
     
     # using local IPC communication    
-    server = pyRpc.PyRpc("Server", workers=2)
+    server = PyRpc("Server", workers=2)
 
     # Could have used a TCP connection if we wanted:
     # server = pyRpc.PyRpc("Server", tcpaddr="127.0.0.1:40000")

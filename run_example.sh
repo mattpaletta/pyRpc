@@ -1,8 +1,11 @@
-python3 -c "import os; print(os.listdir(os.curdir)); import pyRpc"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m'
 
-python examples/server.py
 
-TEST_EXIT_CODE=`python examples/client.py`
+python server.py &
+
+TEST_EXIT_CODE=`python client.py`
 wait $TEST_EXIT_CODE
 
 if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ] ; then
@@ -11,4 +14,4 @@ else
   printf "${GREEN}Tests Passed${NC}\n"
 fi
 
-exit $TEST_EXIT_CODE
+exit "$TEST_EXIT_CODE"
