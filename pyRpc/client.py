@@ -49,7 +49,7 @@ from threading import Thread, current_thread
 import zmq
 from zmq import ZMQError
 
-from pyRpc.constants import TEMPDIR
+from pyRpc.constants import TEMPDIR, PyVersion
 from pyRpc.server import RpcResponse 
 
 logger = logging.getLogger(__name__)
@@ -154,7 +154,7 @@ class RpcConnection(object):
 
         if async or callback:
             # push the request down to the workers
-            self._async_sender.send_pyobj(req)
+            self._async_sender.send_pyobj(req, protocol=PyVersion)
             return RpcResponse(None, 0, None)
 
         # otherwise, we are running this as a blocking call
@@ -163,7 +163,7 @@ class RpcConnection(object):
             self._main_sender = self._context.socket(zmq.REQ)
             self._main_sender.connect(self._address)  
                       
-        self._main_sender.send_pyobj(req)
+        self._main_sender.send_pyobj(req, protocol=PyVersion)
         resp = self._main_sender.recv_pyobj()
         
         logger.debug("Got reply to method %s: %s" % (method, resp))
