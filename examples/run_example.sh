@@ -1,19 +1,12 @@
 #!/usr/bin/env bash
-if command -v python3 &>/dev/null; then
-    echo "Using Python3"
-    python3 server.py &
+python server.py &
+TEST_SERVER=$!
 
-    python3 client.py &
-    wait $!
-    TEST_EXIT_CODE=$?
-else
-    echo "Using Python 2"
-    python server.py &
+python client.py &
+wait $!
+TEST_EXIT_CODE=$?
 
-    python client.py &
-    wait $!
-    TEST_EXIT_CODE=$?
-fi
+kill $TEST_SERVER
 
 if [ -z ${TEST_EXIT_CODE+x} ] || [ "$TEST_EXIT_CODE" -ne 0 ] ; then
   printf "${RED}Tests Failed${NC} - Exit Code: $TEST_EXIT_CODE\n"
